@@ -21,7 +21,32 @@
             <Button Text="Obter previsao do tempo" Clicked="Button_Clicked_2" />
 
             <Label x:Name="lbl_previsao" />
+
+            <!-- Criar botao pra chamar a lista -->
+
+            <Button Text="Ver histórico de previsões" Clicked="Button_Clicked_3"/>
+
+            <!-- Adicionando a lista de previsões do tempo -->
+            <Label Text="Últimas Previsões do Tempo:" FontAttributes="Bold" Margin="0,20,0,5"/>
+            <ListView x:Name="lst_previsoes">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="5">
+                                <Label Text="{Binding Data}" FontAttributes="Bold"/>
+                                <Label Text="{Binding Nome}" />
+                                <Label Text="{Binding Temperatura}" />
+                                <Label Text="{Binding Clima}" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+
         </StackLayout>
+        
+        
     </ScrollView>
 
 </ContentPage>

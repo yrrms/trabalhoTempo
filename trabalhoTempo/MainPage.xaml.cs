@@ -115,6 +115,8 @@ namespace trabalhoTempo
                                         $"Vento: {previsao.Wind}\n" +
                                         $"Previsao: {previsao.Weather}\n" +
                                         $"Descricao: {previsao.WeatherDescription}";
+                         previsao.Data = newDate;
+                        await App.Db.Insert(previsao);//insercao no banco
                     }
                     else
                     {
@@ -126,7 +128,14 @@ namespace trabalhoTempo
                     Debug.WriteLine("-------------------------------------");
 
                     lbl_previsao.Text = dados_previsao;
+
+
                 }// fecha if
+                 //colocar no database
+
+
+
+
             }//fecha try
             catch (Exception ex)
             {
@@ -134,6 +143,15 @@ namespace trabalhoTempo
             }
 
         } // fecha metodo
+
+        private void Button_Clicked_3(System.Object sender, System.EventArgs e)
+        {
+            //mostrar lista
+
+        }
+
+
+       
     } //fecha classe
 }
 
