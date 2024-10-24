@@ -20,6 +20,9 @@
 
             <Button Text="Obter previsao do tempo" Clicked="Button_Clicked_2" />
 
+            <Label Text="Selecione uma data:" />
+            <DatePicker x:Name="datePicker" DateSelected="datePicker_DateSelected" />
+            
             <Label x:Name="lbl_previsao" />
 
             <!-- Criar botao pra chamar a lista -->
@@ -27,16 +30,25 @@
             <Button Text="Ver histórico de previsões" Clicked="Button_Clicked_3"/>
 
             <!-- Adicionando a lista de previsões do tempo -->
-            <Label Text="Últimas Previsões do Tempo:" FontAttributes="Bold" Margin="0,20,0,5"/>
+            <Label Text="Últimas Previsões do Tempo:" />
             <ListView x:Name="lst_previsoes">
+                <ListView.Header>
+                    <!-- lista de colunas -->
+                    <Grid ColumnDefinitions="*, *, *, *, *">
+                        <Label Grid.Column="0" Text="Data" />
+                        <Label Grid.Column="1" Text="Local" />
+                        <Label Grid.Column="2" Text="Temperatura" />
+                        <Label Grid.Column="3" Text="Clima" />
+                    </Grid>
+                </ListView.Header>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid Padding="5">
-                                <Label Text="{Binding Data}" FontAttributes="Bold"/>
-                                <Label Text="{Binding Nome}" />
-                                <Label Text="{Binding Temperatura}" />
-                                <Label Text="{Binding Clima}" />
+                            <Grid ColumnDefinitions="*, *, *, *">
+                                <Label Grid.Column="0" Text="{Binding Data}" FontAttributes="Bold"/>
+                                <Label Grid.Column="1" Text="{Binding Title}" />
+                                <Label Grid.Column="2" Text="{Binding Temperature}" />
+                                <Label Grid.Column="3" Text="{Binding Weather}" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

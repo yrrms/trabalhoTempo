@@ -25,7 +25,7 @@ namespace trabalhoTempo.Helpers
 
         public Task<List<Tempo>> Search(string q) //busca por data, corrigir
         {
-            string sql = "SELECT * FROM Tempo WHERE descricao LIKE '%" + q + "%'";
+            string sql = "SELECT * FROM Tempo WHERE data LIKE '%" + q + "%'";
 
             return _conn.QueryAsync<Tempo>(sql);
         }

@@ -2,6 +2,7 @@
 using trabalhoTempo.Service;
 using System.Diagnostics;
 using System.Linq.Expressions;
+using System.Collections.ObjectModel;
 
 namespace trabalhoTempo
 {
@@ -9,12 +10,14 @@ namespace trabalhoTempo
     {
         CancellationTokenSource _cancelTokenSource;
         bool _isCheckingLocation;
+        ObservableCollection<Tempo> lista = new ObservableCollection<Tempo>();//array que atualiza quando algo muda, mostrando na interface
 
         string? cidade;
 
         public MainPage()
         {
             InitializeComponent();
+            lst_previsoes.ItemsSource = lista;//fonte dos itens
         }
         private async void Button_Clicked(object sender, EventArgs e)
         {
@@ -115,7 +118,7 @@ namespace trabalhoTempo
                                         $"Vento: {previsao.Wind}\n" +
                                         $"Previsao: {previsao.Weather}\n" +
                                         $"Descricao: {previsao.WeatherDescription}";
-                         previsao.Data = newDate;
+                        previsao.Data = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                         await App.Db.Insert(previsao);//insercao no banco
                     }
                     else
@@ -131,7 +134,6 @@ namespace trabalhoTempo
 
 
                 }// fecha if
-                 //colocar no database
 
 
 
@@ -144,14 +146,32 @@ namespace trabalhoTempo
 
         } // fecha metodo
 
-        private void Button_Clicked_3(System.Object sender, System.EventArgs e)
+        private async void Button_Clicked_3(System.Object sender, System.EventArgs e)
         {
             //mostrar lista
 
+            try
+            {
+                // Limpa a lista atual
+                lista.Clear();
+
+                // pega os produtos do banco de dados
+                List<Tempo> tmp = await App.Db.GetAll();
+
+                // Adiciona cada produto na lista 
+                tmp.ForEach(i => lista.Add(i));
+            }
+            catch (Exception ex)//se der erro
+            {
+                await DisplayAlert("Ops", ex.Message, "OK");//mensagem insucesso
+            }
+
         }
 
+        private void datePicker_DateSelected(object sender, DateChangedEventArgs e)
+        {
 
-       
+        }
     } //fecha classe
 }
 
