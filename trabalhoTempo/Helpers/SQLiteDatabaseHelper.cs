@@ -12,7 +12,7 @@ namespace trabalhoTempo.Helpers
             _conn = new SQLiteAsyncConnection(path);//conectando ao sqlite
             _conn.CreateTableAsync<Tempo>().Wait();//criando a tabela produto
         }
-
+        //
         public Task<int> Insert(Tempo p) //inserir previsao, passando o objeto p da classe Previsao
         {
             return _conn.InsertAsync(p);
